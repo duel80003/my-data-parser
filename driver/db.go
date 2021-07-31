@@ -1,13 +1,13 @@
 package driver
 
 import (
-	"cpbl-data-parser/utils"
-	_ "cpbl-data-parser/utils"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	gLogger "gorm.io/gorm/logger"
 	"log"
+	"my-data-parser/utils"
+	_ "my-data-parser/utils"
 	"os"
 	"time"
 )

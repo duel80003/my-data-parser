@@ -1,10 +1,10 @@
 package test
 
 import (
-	"cpbl-data-parser/datastore/players"
-	"cpbl-data-parser/driver"
-	"cpbl-data-parser/entities"
 	"github.com/stretchr/testify/assert"
+	"my-data-parser/datastore/players"
+	"my-data-parser/driver"
+	"my-data-parser/entities"
 	"testing"
 )
 

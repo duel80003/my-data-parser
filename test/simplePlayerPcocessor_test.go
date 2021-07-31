@@ -1,7 +1,7 @@
 package test
 
 import (
-	"cpbl-data-parser/delivery"
+	"my-data-parser/delivery"
 	"testing"
 )
 

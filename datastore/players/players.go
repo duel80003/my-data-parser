@@ -1,10 +1,10 @@
 package players
 
 import (
-	"cpbl-data-parser/entities"
-	"cpbl-data-parser/utils"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
+	"my-data-parser/entities"
+	"my-data-parser/utils"
 )
 
 var logger = utils.LoggerInstance()

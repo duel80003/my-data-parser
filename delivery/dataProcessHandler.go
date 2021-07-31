@@ -2,11 +2,11 @@ package delivery
 
 import (
 	"context"
-	playerStore "cpbl-data-parser/datastore/players"
-	"cpbl-data-parser/driver"
-	"cpbl-data-parser/entities"
-	"cpbl-data-parser/utils"
 	"encoding/json"
+	playerStore "my-data-parser/datastore/players"
+	"my-data-parser/driver"
+	"my-data-parser/entities"
+	"my-data-parser/utils"
 	"os"
 	"os/signal"
 	"syscall"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cpbl-data-parser/delivery"
+	"my-data-parser/delivery"
 	"time"
 )
 

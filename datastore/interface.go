@@ -1,7 +1,7 @@
 package datastore
 
 import (
-	"cpbl-data-parser/entities"
+	"my-data-parser/entities"
 )
 
 type IDBPlayers interface {

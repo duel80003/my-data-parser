@@ -1,8 +1,8 @@
 package driver
 
 import (
-	"cpbl-data-parser/utils"
 	"github.com/segmentio/kafka-go"
+	"my-data-parser/utils"
 )
 
 var (
@@ -16,12 +16,12 @@ var (
 
 func newKafkaReader(topic string) *kafka.Reader {
 	r := kafka.NewReader(kafka.ReaderConfig{
-		Brokers: []string{kafkaHost},
-		Topic: topic,
+		Brokers:   []string{kafkaHost},
+		Topic:     topic,
 		Partition: partition,
-		MinBytes: 10e1,
-		MaxBytes: 10e6,
-		GroupID: topic,
+		MinBytes:  10e1,
+		MaxBytes:  10e6,
+		GroupID:   topic,
 	})
 	return r
 }

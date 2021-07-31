@@ -1,4 +1,4 @@
-module cpbl-data-parser
+module my-data-parser
 
 go 1.16
 

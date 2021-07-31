@@ -1,8 +1,8 @@
 package test
 
 import (
-	"cpbl-data-parser/driver"
 	"github.com/stretchr/testify/assert"
+	"my-data-parser/driver"
 	"testing"
 )
 
