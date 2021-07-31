@@ -9,6 +9,10 @@ type IDBPlayers interface {
 	Upsert(player *entities.Player)
 }
 
+type IStandingInfos interface {
+	BatchUpsert(infos []*entities.StandingInfos)
+}
+
 //type IBattingInfos interface {
 //	BatchUpsert(infos []*entities.BattingInfos)
 //	GetByPlayerId(playerId string) (infos []*entities.BattingInfos, err error)

@@ -4,6 +4,7 @@ import "gorm.io/gorm"
 
 type StandingInfos struct {
 	gorm.Model
+	TeamName          string
 	SortNumber        int
 	Games             int
 	WinAndLose        string

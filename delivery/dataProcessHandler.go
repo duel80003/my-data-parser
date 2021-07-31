@@ -4,8 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	playerStore "my-data-parser/datastore/players"
+	standingInfosStore "my-data-parser/datastore/standingInfos"
+
 	"my-data-parser/driver"
 	"my-data-parser/entities"
+	use_cases "my-data-parser/use-cases"
 	"my-data-parser/utils"
 	"os"
 	"os/signal"
@@ -19,6 +22,7 @@ var (
 	logger                 = utils.LoggerInstance()
 	dbClient               = driver.DatabaseClient()
 	simplePlayerStore      = playerStore.New(dbClient)
+	standingStore          = standingInfosStore.New(dbClient)
 )
 
 func Handler() {
@@ -53,8 +57,10 @@ func StandingInfoProcessor() {
 		}
 		t := make(map[string]interface{})
 		_ = json.Unmarshal(message.Value, &t)
-
 		logger.Infof("message %v", t)
+
+		standsInfos := use_cases.ParseToStandingInfos(t)
+		standingStore.BatchUpsert(standsInfos)
 	}
 }
 
