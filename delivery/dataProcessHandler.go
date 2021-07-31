@@ -25,6 +25,7 @@ func Handler() {
 	utils.SetLogLevel()
 	AfterStop()
 	go SimplePlayerProcessor()
+	go StandingInfoProcessor()
 }
 
 func SimplePlayerProcessor() {
@@ -39,6 +40,21 @@ func SimplePlayerProcessor() {
 		_ = json.Unmarshal(message.Value, player)
 		logger.Infof("message %+v", player)
 		simplePlayerStore.Upsert(player)
+	}
+}
+
+func StandingInfoProcessor() {
+	logger.Infoln("StandingInfoProcessor running")
+	for {
+		message, err := standingInfoReader.ReadMessage(context.Background())
+		if err != nil {
+			logger.Errorf("Read standing info message error %s", err)
+			break
+		}
+		t := make(map[string]interface{})
+		_ = json.Unmarshal(message.Value, &t)
+
+		logger.Infof("message %v", t)
 	}
 }
 
