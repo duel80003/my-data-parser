@@ -1,0 +1,7 @@
+.env*
+
+/tmp
+
+deploy.sh
+
+.idea
