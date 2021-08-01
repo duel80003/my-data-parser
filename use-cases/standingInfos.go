@@ -34,7 +34,7 @@ func ParseToStandingInfos(data map[string]interface{}) (result []*entities.Stand
 		standingInfo.Dragons = toString(tmpValue[10])
 		standingInfo.RecordAtHome = toString(tmpValue[11])
 		standingInfo.RecordAtAway = toString(tmpValue[12])
-		standingInfo.CurrentStace = toString(tmpValue[13])
+		standingInfo.CurrentStreak = toString(tmpValue[13])
 		standingInfo.Last10Games = toString(tmpValue[14])
 		logger.Infof("standingInfo %+v", standingInfo)
 		result = append(result, standingInfo)

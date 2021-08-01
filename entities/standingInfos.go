@@ -11,10 +11,10 @@ type StandingInfos struct {
 	GamesBehind       string
 	WinningPercentage float64
 	GamesEliminate    int
-	Last10Games       string
+	Last10Games       string `gorm:"column:last_10_games"`
 	RecordAtHome      string
 	RecordAtAway      string
-	CurrentStace      string
+	CurrentStreak     string
 	Brothers          string
 	ULions            string
 	Monkeys           string
