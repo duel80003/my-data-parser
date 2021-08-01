@@ -3,13 +3,15 @@ package delivery
 import (
 	"context"
 	"encoding/json"
+	battingFightInfosStore "my-data-parser/datastore/batterFightInfos"
+	battingFollowInfosStore "my-data-parser/datastore/batterFollowInfos"
+	battingInfosStore "my-data-parser/datastore/battingInfos"
 	defenceInfosStroe "my-data-parser/datastore/defenceInfos"
 	pitcherFightInfosStore "my-data-parser/datastore/pitcherFightInfos"
 	pitcherFollowInfosStore "my-data-parser/datastore/pitcherFollowInfos"
 	pitchingInfosStore "my-data-parser/datastore/pitchingInfos"
 	playerStore "my-data-parser/datastore/players"
 	standingInfosStore "my-data-parser/datastore/standingInfos"
-
 	"my-data-parser/driver"
 	"my-data-parser/entities"
 	use_cases "my-data-parser/use-cases"
@@ -31,6 +33,9 @@ var (
 	pitchingStore          = pitchingInfosStore.New(dbClient)
 	pitcherFollowStore     = pitcherFollowInfosStore.New(dbClient)
 	pitcherFightStore      = pitcherFightInfosStore.New(dbClient)
+	battingStore           = battingInfosStore.New(dbClient)
+	batterFollowStore      = battingFollowInfosStore.New(dbClient)
+	batterFightStore       = battingFightInfosStore.New(dbClient)
 )
 
 func Handler() {
@@ -120,7 +125,24 @@ func PlayerDetailsProcessor() {
 				pitcherFightStore.BatchUpsert(pitcherFightInfos)
 			}()
 		} else {
-
+			go func() {
+				battingInfosRawData := dataMap["batting"]
+				battingInfosInDB, _ := battingStore.GetByPlayerId(playerInfo.ID)
+				battingInfos := use_cases.ParseBatting(battingInfosRawData, battingInfosInDB)
+				battingStore.BatchUpsert(battingInfos)
+			}()
+			go func() {
+				batterFollowInfosRawData := dataMap["follow"]
+				batterFollowInfosInDB, _ := batterFollowStore.GetByPlayerId(playerInfo.ID)
+				batterFollowsInfos := use_cases.ParseBatterFollowInfos(batterFollowInfosRawData, batterFollowInfosInDB)
+				batterFollowStore.BatchUpsert(batterFollowsInfos)
+			}()
+			go func() {
+				batterFightInfosRawData := dataMap["fight"]
+				batterFightInfosInDB, _ := batterFightStore.GetByPlayerId(playerInfo.ID)
+				batterFightInfos := use_cases.ParseBatterFightInfos(batterFightInfosRawData, batterFightInfosInDB)
+				batterFightStore.BatchUpsert(batterFightInfos)
+			}()
 		}
 
 	}

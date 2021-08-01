@@ -157,27 +157,80 @@ func ParsePitcherFightInfos(data interface{}, infos []*entities.PitcherFightInfo
 	return p
 }
 
-//func parseData(m map[string]interface{}) {
-//	playerInfoRawData := m["playerInfo"]
-//	decoded, err := base64.StdEncoding.DecodeString(playerInfoRawData.(string))
-//	if err != nil {
-//		return
-//	}
-//	playerInfo := entities.PlayerInfo{}
-//	_ = json.Unmarshal(decoded, &playerInfo)
-//	logger.Infof("player info %+v", playerInfo)
-//	delete(m, "playerInfo")
-//	playerInfo.SetPlayerType()
-//
-//	for key, value := range m {
-//		logger.Infoln("key", key)
-//		decoded, err := base64.StdEncoding.DecodeString(value.(string))
-//		if err != nil {
-//			return
-//		}
-//		logger.Infoln("decoded", string(decoded))
-//		dataTable := entities.DataTable{}
-//		_ = json.Unmarshal(decoded, &dataTable)
-//		logger.Infof("data table %+v", dataTable)
-//	}
-//}
+func ParseBatting(data interface{}, originInfos []*entities.BattingInfos) (b []*entities.BattingInfos) {
+	logger.Infof("default parseBatting data %v", data)
+	if data == nil {
+		return nil
+	}
+	decoded, err := base64Decode(data.(string))
+	if err != nil {
+		return nil
+	}
+	logger.Debugf("parseBatting decoded data %s", decoded)
+	dataTable := entities.DataTable{}
+	_ = json.Unmarshal(decoded, &dataTable)
+	content := fmt.Sprintf("%v", dataTable.TableContent)
+	_ = json.Unmarshal([]byte(content), &b)
+	for i := 0; i < len(b); i++ {
+		for _, val := range originInfos {
+			if b[i].Year == val.Year {
+				b[i].ID = val.ID
+				break
+			}
+		}
+		b[i].SetPlayerId(dataTable.ID)
+	}
+	return b
+}
+
+func ParseBatterFollowInfos(data interface{}, originInfos []*entities.BatterFollowInfos) (b []*entities.BatterFollowInfos) {
+	logger.Infof("default parseBatterFollowInfos data %v", data)
+	if data == nil {
+		return nil
+	}
+	decoded, err := base64Decode(data.(string))
+	if err != nil {
+		return nil
+	}
+	logger.Debugf("parseBatting decoded data %s", decoded)
+	dataTable := entities.DataTable{}
+	_ = json.Unmarshal(decoded, &dataTable)
+	content := fmt.Sprintf("%v", dataTable.TableContent)
+	logger.Debugf("parseBatterFollowInfos content %s", content)
+	_ = json.Unmarshal([]byte(content), &b)
+	for i := 0; i < len(b); i++ {
+		for _, val := range originInfos {
+			if b[i].SId.Value == val.SId.Value {
+				b[i].ID = val.ID
+				break
+			}
+		}
+		b[i].SetPlayerId(dataTable.ID)
+	}
+	return b
+}
+
+func ParseBatterFightInfos(data interface{}, infos []*entities.BatterFightInfos) (p []*entities.BatterFightInfos) {
+	logger.Infof("default parseBatting data %v", data)
+	if data == nil {
+		return nil
+	}
+	decoded, err := base64Decode(data.(string))
+	if err != nil {
+		return nil
+	}
+	logger.Debugf("parseBatting decoded data %s", decoded)
+	dataTable := entities.DataTable{}
+	_ = json.Unmarshal(decoded, &dataTable)
+	content := fmt.Sprintf("%v", dataTable.TableContent)
+	logger.Debugf("parseBatterFightInfos content %s", content)
+	_ = json.Unmarshal([]byte(content), &p)
+	for i := 0; i < len(p); i++ {
+		for _, val := range infos {
+			p[i].ID = val.ID
+			break
+		}
+		p[i].SetPlayerId(dataTable.ID)
+	}
+	return p
+}
