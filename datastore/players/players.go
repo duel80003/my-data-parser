@@ -22,7 +22,7 @@ func (s Store) GetPlayers() (players []*entities.Player, err error) {
 	return players, err
 }
 
-func (s Store) Upsert(player *entities.Player) {
+func (s Store) UpsertWithoutUpdate(player *entities.Player) {
 	err := s.db.Clauses(clause.OnConflict{
 		Columns:   []clause.Column{{Name: "id"}},
 		DoNothing: true,
@@ -30,6 +30,18 @@ func (s Store) Upsert(player *entities.Player) {
 	if err != nil {
 		logger.Errorf("BatchUpsertWithoutUpdate error %s", err)
 	} else {
-		logger.Infoln("BatchUpsertWithoutUpdate done")
+		logger.Infoln("BatchUpsertWithoutUpdate player done")
+	}
+}
+
+func (s Store) Upsert(player *entities.Player) {
+	err := s.db.Clauses(clause.OnConflict{
+		Columns:   []clause.Column{{Name: "id"}},
+		UpdateAll: true,
+	}).Create(&player).Error
+	if err != nil {
+		logger.Errorf("Upsert player error %s", err)
+	} else {
+		logger.Infoln("Upsert player done")
 	}
 }

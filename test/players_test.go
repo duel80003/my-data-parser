@@ -18,7 +18,7 @@ var store = players.New(driver.DatabaseClient())
 //		player,
 //	}
 //
-//	store.BatchUpsert(players)
+//	pitcherFightStore.BatchUpsert(players)
 //	assert.Equal(t, player.ID, "test1234", "they should be equal")
 //	assert.Equal(t, player.Name, "test", "they should be equal")
 //}
