@@ -71,8 +71,8 @@ func StandingInfoProcessor() {
 		t := make(map[string]interface{})
 		_ = json.Unmarshal(message.Value, &t)
 		logger.Infof("message %v", t)
-
-		standsInfos := use_cases.ParseToStandingInfos(t)
+		infos := standingStore.GetAll()
+		standsInfos := use_cases.ParseToStandingInfos(t, infos)
 		standingStore.BatchUpsert(standsInfos)
 	}
 }

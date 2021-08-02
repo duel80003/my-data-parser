@@ -28,3 +28,8 @@ func (s Store) BatchUpsert(infos []*entities.StandingInfos) {
 		logger.Infoln("BatchUpsert standingInfos done")
 	}
 }
+
+func (s Store) GetAll() (infos []*entities.StandingInfos) {
+	s.db.Debug().Find(&infos)
+	return infos
+}

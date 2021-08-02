@@ -9,14 +9,13 @@ import (
 
 var logger = utils.LoggerInstance()
 
-func ParseToStandingInfos(data map[string]interface{}) (result []*entities.StandingInfos) {
+func ParseToStandingInfos(data map[string]interface{}, oldInfos []*entities.StandingInfos) (result []*entities.StandingInfos) {
 	content, ok := data["content"]
 	if !ok {
 		return nil
 	}
 
 	array := content.([]interface{})
-
 	for i, value := range array {
 		standingInfo := &entities.StandingInfos{}
 		tmpValue := value.([]interface{})
@@ -37,6 +36,9 @@ func ParseToStandingInfos(data map[string]interface{}) (result []*entities.Stand
 		standingInfo.CurrentStreak = toString(tmpValue[13])
 		standingInfo.Last10Games = toString(tmpValue[14])
 		logger.Infof("standingInfo %+v", standingInfo)
+		if id := findIDByName(standingInfo.TeamName, oldInfos); id >= 0 {
+			standingInfo.SetId(id)
+		}
 		result = append(result, standingInfo)
 	}
 	return result
@@ -60,4 +62,13 @@ func toFloat(value interface{}) float64 {
 		return 0
 	}
 	return val
+}
+
+func findIDByName(name string, infos []*entities.StandingInfos) uint {
+	for _, v := range infos {
+		if v.TeamName == name {
+			return v.ID
+		}
+	}
+	return -1
 }

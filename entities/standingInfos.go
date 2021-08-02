@@ -21,3 +21,7 @@ type StandingInfos struct {
 	Guardians         string
 	Dragons           string
 }
+
+func (s *StandingInfos) SetId(id uint) {
+	s.ID = id
+}
