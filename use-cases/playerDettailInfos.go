@@ -9,27 +9,13 @@ import (
 	"strings"
 )
 
-//func ParsePlayerDetailsData(rawData []byte) {
-//	m := make(map[string]interface{})
-//	_ = json.Unmarshal(rawData, &m)
-//
-//	dataMap := m["data"]
-//	x := dataMap.(map[string]interface{})
-//	logger.Infof("data %+v", dataMap.(map[string]interface{}))
-//
-//	playerInfoRawData := m["playerInfo"]
-//
-//	playerInfo := parsePlayerInfo(playerInfoRawData.(string))
-//
-//}
-
 func base64Decode(s string) ([]byte, error) {
 	decoded, err := base64.StdEncoding.DecodeString(s)
 	return decoded, err
 }
 
 func ParsePlayerInfo(data interface{}) *entities.Player {
-	logger.Infof("default ParsePlayerInfo data %v", data)
+	logger.Debugf("default ParsePlayerInfo data %v", data)
 	if data == nil {
 		return nil
 	}
@@ -82,7 +68,7 @@ func ParseDefenceData(data interface{}, infos []*entities.DefenceInfos) (d []*en
 }
 
 func ParsePitchingInfos(data interface{}, infos []*entities.PitchingInfos) (p []*entities.PitchingInfos) {
-	logger.Infof("default ParsePitchingInfos data %v", data)
+	logger.Debugf("default ParsePitchingInfos data %v", data)
 	if data == nil {
 		return nil
 	}
@@ -108,7 +94,7 @@ func ParsePitchingInfos(data interface{}, infos []*entities.PitchingInfos) (p []
 }
 
 func ParsePitcherFollowInfos(data interface{}, infos []*entities.PitcherFollowInfos) (p []*entities.PitcherFollowInfos) {
-	logger.Infof("default ParsePitcherFollowInfos data %v", data)
+	logger.Debugf("default ParsePitcherFollowInfos data %v", data)
 	if data == nil {
 		return nil
 	}
@@ -134,7 +120,7 @@ func ParsePitcherFollowInfos(data interface{}, infos []*entities.PitcherFollowIn
 }
 
 func ParsePitcherFightInfos(data interface{}, infos []*entities.PitcherFightInfos) (p []*entities.PitcherFightInfos) {
-	logger.Infof("default ParsePitcherFightInfos data %v", data)
+	logger.Debugf("default ParsePitcherFightInfos data %v", data)
 	if data == nil {
 		return nil
 	}
@@ -158,7 +144,7 @@ func ParsePitcherFightInfos(data interface{}, infos []*entities.PitcherFightInfo
 }
 
 func ParseBatting(data interface{}, originInfos []*entities.BattingInfos) (b []*entities.BattingInfos) {
-	logger.Infof("default parseBatting data %v", data)
+	logger.Debugf("default parseBatting data %v", data)
 	if data == nil {
 		return nil
 	}
@@ -184,7 +170,7 @@ func ParseBatting(data interface{}, originInfos []*entities.BattingInfos) (b []*
 }
 
 func ParseBatterFollowInfos(data interface{}, originInfos []*entities.BatterFollowInfos) (b []*entities.BatterFollowInfos) {
-	logger.Infof("default parseBatterFollowInfos data %v", data)
+	logger.Debugf("default parseBatterFollowInfos data %v", data)
 	if data == nil {
 		return nil
 	}
@@ -211,7 +197,7 @@ func ParseBatterFollowInfos(data interface{}, originInfos []*entities.BatterFoll
 }
 
 func ParseBatterFightInfos(data interface{}, infos []*entities.BatterFightInfos) (p []*entities.BatterFightInfos) {
-	logger.Infof("default parseBatting data %v", data)
+	logger.Debugf("default parseBatting data %v", data)
 	if data == nil {
 		return nil
 	}

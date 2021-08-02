@@ -6,7 +6,7 @@ import (
 	battingFightInfosStore "my-data-parser/datastore/batterFightInfos"
 	battingFollowInfosStore "my-data-parser/datastore/batterFollowInfos"
 	battingInfosStore "my-data-parser/datastore/battingInfos"
-	defenceInfosStroe "my-data-parser/datastore/defenceInfos"
+	defenceInfosStore "my-data-parser/datastore/defenceInfos"
 	pitcherFightInfosStore "my-data-parser/datastore/pitcherFightInfos"
 	pitcherFollowInfosStore "my-data-parser/datastore/pitcherFollowInfos"
 	pitchingInfosStore "my-data-parser/datastore/pitchingInfos"
@@ -29,7 +29,7 @@ var (
 	dbClient               = driver.DatabaseClient()
 	playerInfoStore        = playerStore.New(dbClient)
 	standingStore          = standingInfosStore.New(dbClient)
-	defenceStore           = defenceInfosStroe.New(dbClient)
+	defenceStore           = defenceInfosStore.New(dbClient)
 	pitchingStore          = pitchingInfosStore.New(dbClient)
 	pitcherFollowStore     = pitcherFollowInfosStore.New(dbClient)
 	pitcherFightStore      = pitcherFightInfosStore.New(dbClient)
@@ -39,10 +39,10 @@ var (
 )
 
 func Handler() {
-	utils.SetLogLevel()
 	AfterStop()
 	go SimplePlayerProcessor()
 	go StandingInfoProcessor()
+	go PlayerDetailsProcessor()
 }
 
 func SimplePlayerProcessor() {
