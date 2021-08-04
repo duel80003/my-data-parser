@@ -4,7 +4,6 @@ go 1.16
 
 require (
 	github.com/google/go-cmp v0.5.5 // indirect
-	github.com/jasonlvhit/gocron v0.0.1
 	github.com/joho/godotenv v1.3.0
 	github.com/segmentio/kafka-go v0.4.17
 	github.com/sirupsen/logrus v1.8.1
