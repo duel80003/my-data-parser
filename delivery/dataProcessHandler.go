@@ -144,7 +144,6 @@ func PlayerDetailsProcessor() {
 				batterFightStore.BatchUpsert(batterFightInfos)
 			}()
 		}
-
 	}
 }
 

@@ -70,5 +70,5 @@ func findIDByName(name string, infos []*entities.StandingInfos) uint {
 			return v.ID
 		}
 	}
-	return -1
+	return 0
 }
